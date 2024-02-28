@@ -1,7 +1,7 @@
 
 import java.net.*;
 import java.io.*;
- 
+
 public class KnockKnockServer {
     public static void main(String[] args) throws IOException {
          
@@ -20,18 +20,15 @@ public class KnockKnockServer {
             BufferedReader in = new BufferedReader(
                 new InputStreamReader(clientSocket.getInputStream()));
         ) {
-         
-            String inputLine, outputLine;
-             
-            // Initiate conversation with client
+            // Send file path
             KnockKnockProtocol kkp = new KnockKnockProtocol();
-            outputLine = kkp.processInput(null);
-            out.println(outputLine);
+            String filePath = kkp.processInput(null);
+            out.println(filePath);
  
+            // Read client input until "Bye."
+            String inputLine;
             while ((inputLine = in.readLine()) != null) {
-                outputLine = kkp.processInput(inputLine);
-                out.println(outputLine);
-                if (outputLine.equals("Bye."))
+                if (inputLine.equals("Bye."))
                     break;
             }
         } catch (IOException e) {

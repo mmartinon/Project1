@@ -1,9 +1,4 @@
-import java.net.*;
-import java.io.*;
-import java.util.Scanner;
 
-
-public class KnockKnockProtocol {
 // private static final int WAITING = 0;
 // private static final int SENTKNOCKKNOCK = 1;
 // private static final int SENTCLUE = 2;
@@ -61,37 +56,30 @@ public class KnockKnockProtocol {
 //     }
 //     return theOutput;
 // }
+import java.net.*;
+import java.io.*;
+import java.util.Scanner;
 
-private static final int WAITING = 0;
-private static final String FILE_NAME = "words.txt";
+public class KnockKnockProtocol {
 
-private int state = WAITING;
+    private static final String FILE_PATH = "words.txt";
 
-public String processInput(String theInput) {
-    String theOutput = null;
+    public String processInput(String theInput) {
+        String theOutput = null;
 
-    if (state == WAITING) {
-        try {
-            // Read file content using Scanner
-            StringBuilder content = new StringBuilder();
-            try (Scanner scanner = new Scanner(new File(FILE_NAME))) {
-                while (scanner.hasNextLine()) {
-                    content.append(scanner.nextLine()).append("\n");
+        if (theInput == null) {
+            try {
+                // Check if file exists
+                if (new File(FILE_PATH).exists()) {
+                    theOutput = FILE_PATH; // Return the file path
+                } else {
+                    theOutput = "Error: File not found!";
                 }
+            } catch (Exception e) {
+                theOutput = "Error: Unexpected error!";
             }
-
-            // Prepare server response with file content
-            theOutput = content.toString();
-        } catch (FileNotFoundException e) {
-            theOutput = "Error: File not found!";
-        } finally {
-            // Reset state for next interaction (optional)
-            // state = WAITING;
         }
 
-        // Return server response
         return theOutput;
-    }
-    return theOutput;
     }
 }
