@@ -81,7 +81,6 @@ public class Client
                 int wordCount = WordCount.wordCount(fromServer);
 
                 System.out.println("Client: Word count: " + wordCount);
-                System.out.println("Bye.");
                 out.println(String.valueOf(wordCount));
                 out.println(String.valueOf("Bye."));
             }
