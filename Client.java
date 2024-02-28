@@ -1,49 +1,3 @@
-
-
-
-    // public static void main(String[] args) throws IOException {
-        
-    //     if (args.length != 2) {
-    //         System.err.println(
-    //             "Usage: java EchoClient <host name> <port number>");
-    //         System.exit(1);
-    //     }
-
-    //     String hostName = args[0];
-    //     int portNumber = Integer.parseInt(args[1]);
-
-    //     try (
-    //         Socket kkSocket = new Socket(hostName, portNumber);
-    //         PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
-    //         BufferedReader in = new BufferedReader(
-    //             new InputStreamReader(kkSocket.getInputStream()));
-    //     ) {
-    //         BufferedReader stdIn =
-    //             new BufferedReader(new InputStreamReader(System.in));
-    //         String fromServer;
-    //         String fromUser;
-
-    //         while ((fromServer = in.readLine()) != null) {
-    //             System.out.println("Server: " + fromServer);
-    //             if (fromServer.equals("Bye."))
-    //                 break;
-                
-    //             fromUser = stdIn.readLine();
-    //             if (fromUser != null) {
-    //                 System.out.println("Client: " + fromUser);
-    //                 out.println(fromUser);
-    //             }
-    //         }
-    //     } catch (UnknownHostException e) {
-    //         System.err.println("Don't know about host " + hostName);
-    //         System.exit(1);
-    //     } catch (IOException e) {
-    //         System.err.println("Couldn't get I/O for the connection to " +
-    //             hostName);
-    //         System.exit(1);
-    //     }
-    // }
-
 import java.io.*;
 import java.net.*;
 
@@ -62,7 +16,8 @@ public class Client
 
         try 
         (
-            Socket kkSocket = new Socket(hostName, portNumber); //initiate client socket connected to server
+            //initiate client socket connected to server
+            Socket kkSocket = new Socket(hostName, portNumber); 
             //create output/input streams
             PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()))
@@ -72,25 +27,35 @@ public class Client
 
             while ((fromServer = in.readLine()) != null) 
             {
-                System.out.println("Server: " + fromServer);
-                if (fromServer.equals("Bye.")) {
-                    break;
-                }
+                //print server's request
+                System.out.println("Server: What is the word count of the file " + fromServer + "?");
 
-                // Count words in the received file content
+                // if (fromServer.equals("Bye.")) 
+                // {
+                //     break;
+                // }
+
+                //count words in the file
                 int wordCount = WordCount.wordCount(fromServer);
 
-                System.out.println("Client: Word count: " + wordCount);
+                //print word count of file on client terminal
+                System.out.println("Client: The word count of " + fromServer + " is " + wordCount + ".");
+                //send word count to server
                 out.println(String.valueOf(wordCount));
-                out.println(String.valueOf("Bye."));
+
+                //end session between server/client
+                System.exit(1);
             }
-        } catch (UnknownHostException e) {
+        } 
+        catch (UnknownHostException e) 
+        {
             System.err.println("Don't know about host " + hostName);
             System.exit(1);
-        } catch (IOException e) {
+        } 
+        catch (IOException e) 
+        {
             System.err.println("Couldn't get I/O for the connection to " + hostName);
             System.exit(1);
         }
     }
 }
-

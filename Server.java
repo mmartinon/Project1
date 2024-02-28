@@ -4,7 +4,8 @@ import java.io.*;
 public class Server 
 {
     public static void main(String[] args) throws IOException 
-    {     
+    {    
+        //incorrect command line usage 
         if (args.length != 1) 
         {
             System.err.println("Usage: java KnockKnockServer <port number>");
@@ -29,10 +30,19 @@ public class Server
  
             //read client input until "Bye."
             String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                if (inputLine.equals("Bye."))
-                    break;
+            while ((inputLine = in.readLine()) != null) 
+            {
+                //print word count of file on server terminal
+                System.out.println(inputLine);
+
+                // if (inputLine.equals("Bye."))
+                // {
+                //     break;
+                // }
             }
+         
+            //end session between server/client
+            System.exit(1);
         } 
         catch (IOException e) 
         {
