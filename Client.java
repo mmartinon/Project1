@@ -5,6 +5,7 @@ public class Client
 {
     public static void main(String[] args) throws IOException 
     {
+        //incorrect command line usage 
         if (args.length != 2) 
         {
             System.err.println("Usage: java KnockKnockClient <host name> <port number>");
@@ -28,12 +29,7 @@ public class Client
             while ((fromServer = in.readLine()) != null) 
             {
                 //print server's request
-                System.out.println("Server: What is the word count of the file " + fromServer + "?");
-
-                // if (fromServer.equals("Bye.")) 
-                // {
-                //     break;
-                // }
+                System.out.println("Server: What is the word count of " + fromServer + "?");
 
                 //count words in the file
                 int wordCount = WordCount.wordCount(fromServer);

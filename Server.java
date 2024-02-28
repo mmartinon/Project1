@@ -16,8 +16,10 @@ public class Server
  
         try 
         ( 
-            ServerSocket serverSocket = new ServerSocket(portNumber); //initiate server socket on port
-            Socket clientSocket = serverSocket.accept(); //connect to client
+            //initiate server socket on port
+            ServerSocket serverSocket = new ServerSocket(portNumber); 
+            //connect to client
+            Socket clientSocket = serverSocket.accept(); 
             //create output/input streams
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true); 
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -28,17 +30,12 @@ public class Server
             String filePath = kkp.processInput(null);
             out.println(filePath);
  
-            //read client input until "Bye."
+            //read client input
             String inputLine;
             while ((inputLine = in.readLine()) != null) 
             {
                 //print word count of file on server terminal
-                System.out.println(inputLine);
-
-                // if (inputLine.equals("Bye."))
-                // {
-                //     break;
-                // }
+                System.out.println("The word count of " + filePath + " is " + inputLine + ".");
             }
          
             //end session between server/client
