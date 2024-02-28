@@ -82,7 +82,8 @@ public class Client
 
                 System.out.println("Client: Word count: " + wordCount);
                 System.out.println("Bye.");
-                out.println(String.valueOf(wordCount)); // Send word count to server
+                out.println(String.valueOf(wordCount));
+                out.println(String.valueOf("Bye."));
             }
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host " + hostName);
