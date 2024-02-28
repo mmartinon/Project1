@@ -47,10 +47,12 @@
 import java.io.*;
 import java.net.*;
 
-public class KnockKnockClient {
-
-    public static void main(String[] args) throws IOException {
-        if (args.length != 2) {
+public class Client 
+{
+    public static void main(String[] args) throws IOException 
+    {
+        if (args.length != 2) 
+        {
             System.err.println("Usage: java KnockKnockClient <host name> <port number>");
             System.exit(1);
         }
@@ -60,18 +62,20 @@ public class KnockKnockClient {
 
         try 
         (
-                Socket kkSocket = new Socket(hostName, portNumber);
-                PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()))) 
-            {
-                String fromServer;
+            Socket kkSocket = new Socket(hostName, portNumber); //initiate client socket connected to server
+            //create output/input streams
+            PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()))
+        ) 
+        {
+            String fromServer;
 
-                while ((fromServer = in.readLine()) != null) 
-                {
-                    System.out.println("Server: " + fromServer);
-                    if (fromServer.equals("Bye.")) {
-                        break;
-                    }
+            while ((fromServer = in.readLine()) != null) 
+            {
+                System.out.println("Server: " + fromServer);
+                if (fromServer.equals("Bye.")) {
+                    break;
+                }
 
                 // Count words in the received file content
                 int wordCount = WordCount.wordCount(fromServer);

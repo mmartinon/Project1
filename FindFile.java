@@ -16,70 +16,78 @@
 //                                 "Is there an owl in here?",
 //                                 "Is there an echo in here?" };
 
-// public String processInput(String theInput) {
-//     String theOutput = null;
+// public String processInput(String input) {
+//     String output = null;
 
 //     if (state == WAITING) {
-//         theOutput = "Knock! Knock!";
+//         output = "Knock! Knock!";
 //         state = SENTKNOCKKNOCK;
 //     } else if (state == SENTKNOCKKNOCK) {
-//         if (theInput.equalsIgnoreCase("Who's there?")) {
-//             theOutput = clues[currentJoke];
+//         if (input.equalsIgnoreCase("Who's there?")) {
+//             output = clues[currentJoke];
 //             state = SENTCLUE;
 //         } else {
-//             theOutput = "You're supposed to say \"Who's there?\"! " +
+//             output = "You're supposed to say \"Who's there?\"! " +
 //             "Try again. Knock! Knock!";
 //         }
 //     } else if (state == SENTCLUE) {
-//         if (theInput.equalsIgnoreCase(clues[currentJoke] + " who?")) {
-//             theOutput = answers[currentJoke] + " Want another? (y/n)";
+//         if (input.equalsIgnoreCase(clues[currentJoke] + " who?")) {
+//             output = answers[currentJoke] + " Want another? (y/n)";
 //             state = ANOTHER;
 //         } else {
-//             theOutput = "You're supposed to say \"" + 
+//             output = "You're supposed to say \"" + 
 //             clues[currentJoke] + 
 //             " who?\"" + 
 //             "! Try again. Knock! Knock!";
 //             state = SENTKNOCKKNOCK;
 //         }
 //     } else if (state == ANOTHER) {
-//         if (theInput.equalsIgnoreCase("y")) {
-//             theOutput = "Knock! Knock!";
+//         if (input.equalsIgnoreCase("y")) {
+//             output = "Knock! Knock!";
 //             if (currentJoke == (NUMJOKES - 1))
 //                 currentJoke = 0;
 //             else
 //                 currentJoke++;
 //             state = SENTKNOCKKNOCK;
 //         } else {
-//             theOutput = "Bye.";
+//             output = "Bye.";
 //             state = WAITING;
 //         }
 //     }
-//     return theOutput;
+//     return output;
 // }
-import java.net.*;
 import java.io.*;
-import java.util.Scanner;
 
-public class KnockKnockProtocol {
-
+public class FindFile 
+{
     private static final String FILE_PATH = "words.txt";
 
-    public String processInput(String theInput) {
-        String theOutput = null;
+    public String processInput(String input) 
+    {
+        String output = null;
 
-        if (theInput == null) {
-            try {
-                // Check if file exists
-                if (new File(FILE_PATH).exists()) {
-                    theOutput = FILE_PATH; // Return the file path
-                } else {
-                    theOutput = "Error: File not found!";
+        if (input == null) 
+        {
+            try 
+            {
+                //check if file exists - return path if yes, error message if no
+                if (new File(FILE_PATH).exists()) 
+                {
+                    output = FILE_PATH; 
+                } 
+                else 
+                {
+                    output = "Error: File not found";
                 }
-            } catch (Exception e) {
-                theOutput = "Error: Unexpected error!";
+            }
+            
+            //accounts for other possible errors
+            catch (Exception e) 
+            {
+                output = "Error: Unexpected error";
             }
         }
 
-        return theOutput;
+        return output;
     }
 }
