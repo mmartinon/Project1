@@ -40,7 +40,6 @@ public class WordCount
 		try
 		{
 			System.out.println(wordCount("words.txt"));
-			System.out.println(wordCount("Bye."));
 		} 
 		catch (FileNotFoundException e)
 		{
