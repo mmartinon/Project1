@@ -30,7 +30,41 @@ public class Server
             //send file path to client
             FindFile kkp = new FindFile();
             String filePath = kkp.processInput(null);
-            out.println(filePath);
+            int numClients = 2;
+
+            File original = new File(filePath);
+            long fileSize = original.length();
+
+            long portionSize = fileSize / numClients;
+
+            for (int i = 1; i <= numClients; i++)
+            {
+                String fileName = "client " + i + ".txt";
+                File outputFile = new File(fileName);
+
+                // Open buffered output stream
+                try (FileOutputStream fos = new FileOutputStream(outputFile)) 
+                {
+                // Open buffered input stream
+                    try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(original))) 
+                    {
+                        long bytesRead = 0;
+                        byte[] buffer = new byte[1024]; // adjust buffer size as needed
+
+                        // Read and write data in chunks
+                        while (bytesRead < portionSize && bis.available() > 0) 
+                        {
+                            int bytes = bis.read(buffer);
+                            fos.write(buffer, 0, bytes);
+                            bytesRead += bytes;
+                        }
+                    }
+                }
+
+                out.println(fileName);
+            }
+
+            // out.println(filePath);
  
             //read client input
             String inputLine;
