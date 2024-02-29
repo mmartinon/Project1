@@ -1,4 +1,5 @@
 import java.net.*;
+import java.util.Enumeration;
 import java.io.*;
 
 public class Server 
@@ -17,7 +18,7 @@ public class Server
         try 
         ( 
             //initiate server socket on port
-            ServerSocket serverSocket = new ServerSocket(portNumber); 
+            ServerSocket serverSocket = new ServerSocket(portNumber);
             //connect to client
             Socket clientSocket = serverSocket.accept(); 
             //create output/input streams
@@ -25,6 +26,7 @@ public class Server
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         ) 
         {
+            
             //send file path to client
             FindFile kkp = new FindFile();
             String filePath = kkp.processInput(null);

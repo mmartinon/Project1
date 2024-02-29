@@ -19,6 +19,7 @@ public class Client
         (
             //initiate client socket connected to server
             Socket kkSocket = new Socket(hostName, portNumber); 
+            // new Socket(hostName, portNumber); 
             //create output/input streams
             PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()))
