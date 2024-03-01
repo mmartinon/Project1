@@ -21,7 +21,8 @@ public class Client
             Socket kkSocket = new Socket(hostName, portNumber);
             //create output/input streams
             PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()))
+            BufferedReader in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
+            DataInputStream fileIn = new DataInputStream(kkSocket.getInputStream())
         ) 
         {
             String fromServer;
