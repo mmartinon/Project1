@@ -64,7 +64,8 @@ public class Server
                 int end = start + approximateSubstringLength;
 
                 // Find the last space character within the substring
-                while (end < fileBytes.length && fileBytes[end] != ' ') {
+                while (end < fileBytes.length && fileBytes[end] != ' ') 
+                {
                     end++;
                 }
 
