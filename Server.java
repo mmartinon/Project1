@@ -60,12 +60,13 @@ public class Server
             int approximateSubstringLength = fileBytes.length / numSubstrings;
 
             String[] substrings = new String[numSubstrings];
-            
+
             for (int i = 0, start = 0; i < numSubstrings; i++) {
                 int end = start + approximateSubstringLength;
             
                 // Find the last space character within the substring
-                while (end < fileBytes.length && fileBytes[end] != ' ') {
+                while (end < fileBytes.length && fileBytes[end] != ' ') 
+                {
                     end++;
                 }
             
@@ -74,6 +75,7 @@ public class Server
             
                 substrings[i] = new String(fileBytes, start, end - start);
                 clientWriters[i].println(substrings[i]);
+                System.out.println("hello");
                 start = end;
             }
             
