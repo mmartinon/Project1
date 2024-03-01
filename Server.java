@@ -6,6 +6,8 @@ public class Server
     public static void main(String[] args) throws IOException 
     {    
         int portNumber = 4444;
+
+        IPPrinter.printIP();
         
         Socket socket = new Socket();
         
@@ -63,7 +65,7 @@ public class Server
             {
                 int end = Math.min(start + approximateSubstringLength, fileBytes.length);
                 substrings[i] = new String(fileBytes, start, end - start);
-                clientWriters[i].println(substrings[i]);
+                clientWriters[i].print(substrings[i]);
                 start = end;
             }
 
