@@ -60,34 +60,12 @@ public class Server
             int approximateSubstringLength = fileBytes.length / numSubstrings;
 
             String[] substrings = new String[numSubstrings];
-            for (int i = 0, start = 0; i < numSubstrings; i++) 
-            {
-                int end = Math.min(start + approximateSubstringLength, fileBytes.length);
+            for (int i = 0, start = 0; i < numSubstrings; i++) {
+                int end = findSpaceCharacter(fileBytes, start + approximateSubstringLength);
                 substrings[i] = new String(fileBytes, start, end - start);
                 clientWriters[i].println(substrings[i]);
                 start = end;
             }
-
-            // Output the substrings
-            // for (String substring : substrings) {
-            //     System.out.println(substring);
-            // }
-
-            // String line;
-            // int clientIndex = 0;
-
-            // while ((line = fileReader.readLine()) != null) 
-            // {
-            //     clientWriters[clientIndex].println(line); // Send a line to the current client
-
-            //     clientIndex = (clientIndex + 1) % 1; // Cycle to the next client
-            // }
-
-            // Indicate end of file to all clients
-            // for (PrintWriter writer : clientWriters) 
-            // {
-            //     writer.println("EOF");
-            // }
 
             // Read and print word counts from each client
             for (int i = 0; i < 2; i++) 
@@ -96,17 +74,20 @@ public class Server
                 System.out.println("Word count from client " + i + ": " + count);
             }
 
-
-            // String filePath = "words.txt";
-            // out.println(filePath);
- 
-            //end session between server/client
-            // System.exit(1);
         } 
         catch (IOException e) 
         {
             System.out.println("Exception caught when trying to listen on port " + portNumber + " or listening for a connection");
             System.out.println(e.getMessage());
         }
+    }
+
+    private static int findSpaceCharacter(byte[] bytes, int endIndex) {
+        for (int i = endIndex; i >= 0; i--) {
+            if (bytes[i] == ' ') {
+                return i;
+            }
+        }
+        return endIndex; // If no space character is found, return the original endIndex
     }
 }
