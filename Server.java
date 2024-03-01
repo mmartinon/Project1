@@ -49,11 +49,11 @@ public class Server
         ( 
             //initiate server socket on port
             //connect to client
-            Socket clientSocket = serverSocket.accept(); 
+            // Socket clientSocket = serverSocket.accept(); 
 
             //create output/input streams
-            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true); 
-            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            // PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true); 
+            // BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             BufferedReader fileReader = new BufferedReader(new FileReader("words.txt"))
         ) 
         {
@@ -83,16 +83,16 @@ public class Server
             }
 
 
-            String filePath = "words.txt";
-            out.println(filePath);
+            // String filePath = "words.txt";
+            // out.println(filePath);
  
-            //read client input
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) 
-            {
-                //print word count of file on server terminal
-                System.out.println("The word count of " + filePath + " is " + inputLine + ".");
-            }
+            // //read client input
+            // String inputLine;
+            // while ((inputLine = in.readLine()) != null) 
+            // {
+            //     //print word count of file on server terminal
+            //     System.out.println("The word count of " + filePath + " is " + inputLine + ".");
+            // }
          
             //end session between server/client
             System.exit(1);
