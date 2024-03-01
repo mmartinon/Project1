@@ -5,17 +5,10 @@ public class Server
 {
     public static void main(String[] args) throws IOException 
     {    
-        //incorrect command line usage 
-        // if (args.length != 1) 
-        // {
-        //     System.err.println("Usage: java KnockKnockServer");
-        //     System.exit(1);
-        // }
- 
         int portNumber = 4444;
-
         
         Socket socket = new Socket();
+        
         socket.connect(new InetSocketAddress("outlook.com", 80));
         String ipAddress = socket.getLocalAddress().getHostAddress();
         socket.close();
