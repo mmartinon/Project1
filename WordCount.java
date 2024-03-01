@@ -15,23 +15,27 @@ public class WordCount
 	 */
 	public static int wordCount(String path) throws FileNotFoundException
 	{
-		// File object
-		File file = new File(path);
+		int wordCount = 0;
+		wordCount += path.trim().split("\\s+").length;
+
 		
-		// file existence check
-		if(!file.exists())  
-			throw new FileNotFoundException();
+		// // File object
+		// File file = new File(path);
 		
-		Scanner reader = new Scanner(file);
+		// // file existence check
+		// if(!file.exists())  
+		// 	throw new FileNotFoundException();
 		
-	    int wordCount = 0;
+		// Scanner reader = new Scanner(file);
 		
-	    // 1. read file line by line, count # of words, accumulate result
-	    // 2. this approach is faster for large file, limits stack overflow error
-		while(reader.hasNext())
-			wordCount += reader.nextLine().trim().split("\\s+").length;
+	    // int wordCount2 = 0;
 		
-	    reader.close();
+	    // // 1. read file line by line, count # of words, accumulate result
+	    // // 2. this approach is faster for large file, limits stack overflow error
+		// while(reader.hasNext())
+		// 	wordCount2 += reader.nextLine().trim().split("\\s+").length;
+		
+	    // reader.close();
 	    return wordCount;
 	}
 
