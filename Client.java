@@ -6,9 +6,9 @@ public class Client
     public static void main(String[] args) throws IOException 
     {
         //incorrect command line usage 
-        if (args.length != 2) 
+        if (args.length != 1) 
         {
-            System.err.println("Usage: java KnockKnockClient <host name> <port number>");
+            System.err.println("Usage: java KnockKnockClient <host name>");
             System.exit(1);
         }
 
@@ -18,7 +18,7 @@ public class Client
         try 
         (
             //initiate client socket connected to server
-            Socket kkSocket = new Socket(hostName, portNumber); 
+            Socket kkSocket = new Socket(hostName, portNumber);
             //create output/input streams
             PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()))
