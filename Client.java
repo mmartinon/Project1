@@ -22,7 +22,6 @@ public class Client
             //create output/input streams
             PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
-            DataInputStream fileIn = new DataInputStream(kkSocket.getInputStream())
         ) 
         {
             String fromServer;
@@ -41,7 +40,7 @@ public class Client
                 out.println(String.valueOf(wordCount));
 
                 //end session between server/client
-                System.exit(1);
+                // System.exit(1);
             }
         } 
         catch (UnknownHostException e) 
