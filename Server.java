@@ -62,16 +62,25 @@ public class Server
             String[] substrings = new String[numSubstrings];
             for (int i = 0, start = 0; i < numSubstrings; i++) {
                 int end = start + approximateSubstringLength;
-
+            
+                // Make sure end is within the bounds of the array
+                end = Math.min(end, fileBytes.length);
+            
                 // Find the last space character within the substring
-                while (end < fileBytes.length && fileBytes[end] != ' ') 
-                {
+                while (end < fileBytes.length && fileBytes[end] != ' ') {
                     end++;
                 }
-
-                substrings[i] = new String(fileBytes, start, end - start);
-                clientWriters[i].println(substrings[i]);
-                start = end;
+            
+                // Make sure start is less than or equal to end
+                if (start <= end) 
+                {
+                    substrings[i] = new String(fileBytes, start, end - start);
+                    clientWriters[i].println(substrings[i]);
+                    start = end;
+                } else {
+                    // Handle the error condition, e.g., print an error message
+                    System.err.println("Error: start > end in substring calculation");
+                }
             }
 
             // Read and print word counts from each client
