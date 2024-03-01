@@ -95,7 +95,7 @@ public class Server
             // }
          
             //end session between server/client
-            System.exit(1);
+            // System.exit(1);
         } 
         catch (IOException e) 
         {
