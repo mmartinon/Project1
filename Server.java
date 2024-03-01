@@ -60,19 +60,36 @@ public class Server
             int approximateSubstringLength = fileBytes.length / numSubstrings;
 
             String[] substrings = new String[numSubstrings];
+            
             for (int i = 0, start = 0; i < numSubstrings; i++) {
                 int end = start + approximateSubstringLength;
-
+            
                 // Find the last space character within the substring
-                while (end < fileBytes.length && fileBytes[end] != ' ') 
-                {
+                while (end < fileBytes.length && fileBytes[end] != ' ') {
                     end++;
                 }
-
+            
+                // Ensure end doesn't go out of bounds
+                end = Math.min(end, fileBytes.length);  // Clamp end to string length
+            
                 substrings[i] = new String(fileBytes, start, end - start);
                 clientWriters[i].println(substrings[i]);
                 start = end;
             }
+            
+            // for (int i = 0, start = 0; i < numSubstrings; i++) {
+            //     int end = start + approximateSubstringLength;
+
+            //     // Find the last space character within the substring
+            //     while (end < fileBytes.length && fileBytes[end] != ' ') 
+            //     {
+            //         end++;
+            //     }
+
+            //     substrings[i] = new String(fileBytes, start, end - start);
+            //     clientWriters[i].println(substrings[i]);
+            //     start = end;
+            // }
 
             // Read and print word counts from each client
             for (int i = 0; i < 2; i++) 
