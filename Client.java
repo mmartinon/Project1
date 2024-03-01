@@ -25,23 +25,45 @@ public class Client
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         ) 
         {
-            String fromServer;
 
-            while ((fromServer = in.readLine()) != null) 
+            StringBuilder fromServer = new StringBuilder();
+            char[] buffer = new char[1024];
+            int bytesRead;
+
+            while ((bytesRead = in.read(buffer)) != -1) 
             {
-                //print server's request
-                System.out.println("Server: What is the word count of " + fromServer + "?");
-
-                //count words in the line
-                wordCount += WordCount.wordCount(fromServer);
-                out.println(String.valueOf(wordCount));
-
-                //print word count of file on client terminal
-                System.out.println("Client: The word count of " + fromServer + " is " + wordCount + ".");                
-
-                //end session between server/client
-                // System.exit(1);
+                // append the received data to the StringBuilder
+                fromServer.append(buffer, 0, bytesRead);
             }
+
+            // print the server's request
+            System.out.println("Server: What is the word count of " + fromServer + "?");
+
+            // count words in the entire string
+            wordCount += WordCount.wordCount(fromServer.toString());
+            out.println(String.valueOf(wordCount));
+
+            // print word count of the string on the client terminal
+            System.out.println("Client: The word count of " + fromServer + " is " + wordCount + ".");
+
+
+            // String fromServer;
+
+            // while (( fromServer = in.readLine()) != null) 
+            // {
+            //     //print server's request
+            //     System.out.println("Server: What is the word count of " + fromServer + "?");
+
+            //     //count words in the line
+            //     wordCount += WordCount.wordCount(fromServer);
+            //     out.println(String.valueOf(wordCount));
+
+            //     //print word count of file on client terminal
+            //     System.out.println("Client: The word count of " + fromServer + " is " + wordCount + ".");                
+
+            //     //end session between server/client
+            //     // System.exit(1);
+            // }
 
             out.println(String.valueOf(wordCount));
 
