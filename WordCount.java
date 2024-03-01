@@ -15,7 +15,7 @@ public class WordCount
 	 */
 	public static int wordCount(String path) throws FileNotFoundException
 	{
-		int wordCount = 0;
+		int wordCount = 1;
 		wordCount += path.trim().split("\\s+").length;
 
 		
