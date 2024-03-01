@@ -61,7 +61,13 @@ public class Server
 
             String[] substrings = new String[numSubstrings];
             for (int i = 0, start = 0; i < numSubstrings; i++) {
-                int end = findSpaceCharacter(fileBytes, start + approximateSubstringLength);
+                int end = start + approximateSubstringLength;
+
+                // Find the last space character within the substring
+                while (end < fileBytes.length && fileBytes[end] != ' ') {
+                    end++;
+                }
+
                 substrings[i] = new String(fileBytes, start, end - start);
                 clientWriters[i].println(substrings[i]);
                 start = end;
