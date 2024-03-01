@@ -14,12 +14,13 @@ public class Server
  
         int portNumber = 4444;
 
-        
-        Socket socket = new Socket();
-        socket.connect(new InetSocketAddress("outlook.com", 80));
-        String ipAddress = socket.getLocalAddress().getHostAddress();
-        socket.close();
-        System.out.println("Server IP address: " + ipAddress);
+        String ipAddres =  IPPrinter.printIP();
+
+        // Socket socket = new Socket();
+        // socket.connect(new InetSocketAddress("outlook.com", 80));
+        // String ipAddress = socket.getLocalAddress().getHostAddress();
+        // socket.close();
+        // System.out.println("Server IP address: " + ipAddress);
  
         Socket[] clientSockets = new Socket[5];
         ServerSocket serverSocket = new ServerSocket(portNumber); 
