@@ -24,7 +24,7 @@ public class Server
         ServerSocket serverSocket = new ServerSocket(portNumber); 
 
         // Wait for 5 clients
-        for (int i = 0; i < 2; i++) 
+        for (int i = 0; i < 1; i++) 
         {
             System.out.println("Waiting for client connection...");
             clientSockets[i] = serverSocket.accept();
@@ -34,13 +34,13 @@ public class Server
 
         BufferedReader[] clientStreams = new BufferedReader[5];
 
-        for (int j = 0; j < 2; j++) 
+        for (int j = 0; j < 1; j++) 
         {
             clientStreams[j] = new BufferedReader(new InputStreamReader(clientSockets[j].getInputStream()));
         }
 
         PrintWriter[] clientWriters = new PrintWriter[5];
-        for (int j = 0; j < 2; j++) 
+        for (int j = 0; j < 1; j++) 
         {
             clientWriters[j] = new PrintWriter(clientSockets[j].getOutputStream(), true);
         }
@@ -66,7 +66,7 @@ public class Server
             {
                 clientWriters[clientIndex].println(line); // Send a line to the current client
 
-                clientIndex = (clientIndex + 1) % 2; // Cycle to the next client
+                clientIndex = (clientIndex + 1) % 1; // Cycle to the next client
             }
 
             // Indicate end of file to all clients
@@ -76,7 +76,7 @@ public class Server
             // }
 
             // Read and print word counts from each client
-            for (int i = 0; i < 2; i++) 
+            for (int i = 0; i < 1; i++) 
             {
                 String count = clientStreams[i].readLine();
                 System.out.println("Word count from client " + i + ": " + count);
