@@ -14,6 +14,7 @@ public class Client
 
         String hostName = args[0];
         int portNumber = 4444;
+        int wordCount = 0;
 
         try 
         (
@@ -32,16 +33,20 @@ public class Client
                 System.out.println("Server: What is the word count of " + fromServer + "?");
 
                 //count words in the file
-                int wordCount = WordCount.wordCount(fromServer);
+                wordCount += WordCount.wordCount(fromServer);
 
                 //print word count of file on client terminal
                 System.out.println("Client: The word count of " + fromServer + " is " + wordCount + ".");
                 //send word count to server
-                out.println(String.valueOf(wordCount));
+                
 
                 //end session between server/client
                 // System.exit(1);
             }
+
+            out.println(String.valueOf(wordCount));
+
+            System.exit(1);
         } 
         catch (UnknownHostException e) 
         {

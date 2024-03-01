@@ -14,6 +14,7 @@ public class Server
  
         int portNumber = 4444;
 
+        
         Socket socket = new Socket();
         socket.connect(new InetSocketAddress("outlook.com", 80));
         String ipAddress = socket.getLocalAddress().getHostAddress();
