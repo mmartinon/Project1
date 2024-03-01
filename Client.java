@@ -8,7 +8,7 @@ public class Client
         //incorrect command line usage 
         if (args.length != 1) 
         {
-            System.err.println("Usage: java KnockKnockClient <host name>");
+            System.err.println("Usage: java Client.java <host name>");
             System.exit(1);
         }
 
@@ -19,10 +19,10 @@ public class Client
         try 
         (
             //initiate client socket connected to server
-            Socket kkSocket = new Socket(hostName, portNumber);
+            Socket socket = new Socket(hostName, portNumber);
             //create output/input streams
-            PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         ) 
         {
             String fromServer;
