@@ -1,5 +1,4 @@
 import java.net.*;
-import java.util.Enumeration;
 import java.io.*;
 
 public class Server 
@@ -7,18 +6,18 @@ public class Server
     public static void main(String[] args) throws IOException 
     {    
         //incorrect command line usage 
-        if (args.length != 1) 
-        {
-            System.err.println("Usage: java KnockKnockServer <port number>");
-            System.exit(1);
-        }
+        // if (args.length != 1) 
+        // {
+        //     System.err.println("Usage: java KnockKnockServer");
+        //     System.exit(1);
+        // }
  
-        int portNumber = Integer.parseInt(args[0]);
+        int portNumber = 4444;
  
         try 
         ( 
             //initiate server socket on port
-            ServerSocket serverSocket = new ServerSocket(portNumber);
+            ServerSocket serverSocket = new ServerSocket(portNumber); 
             //connect to client
             Socket clientSocket = serverSocket.accept(); 
             //create output/input streams
@@ -26,45 +25,10 @@ public class Server
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         ) 
         {
-            
             //send file path to client
-            FindFile kkp = new FindFile();
-            String filePath = kkp.processInput(null);
-            int numClients = 2;
-
-            File original = new File(filePath);
-            long fileSize = original.length();
-
-            long portionSize = fileSize / numClients;
-
-            for (int i = 1; i <= numClients; i++)
-            {
-                String fileName = "client " + i + ".txt";
-                File outputFile = new File(fileName);
-
-                // Open buffered output stream
-                try (FileOutputStream fos = new FileOutputStream(outputFile)) 
-                {
-                // Open buffered input stream
-                    try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(original))) 
-                    {
-                        long bytesRead = 0;
-                        byte[] buffer = new byte[1024]; // adjust buffer size as needed
-
-                        // Read and write data in chunks
-                        while (bytesRead < portionSize && bis.available() > 0) 
-                        {
-                            int bytes = bis.read(buffer);
-                            fos.write(buffer, 0, bytes);
-                            bytesRead += bytes;
-                        }
-                    }
-                }
-
-                out.println(fileName);
-            }
-
-            // out.println(filePath);
+            //FindFile kkp = new FindFile();
+            String filePath = "words.txt";
+            out.println(filePath);
  
             //read client input
             String inputLine;

@@ -13,13 +13,12 @@ public class Client
         }
 
         String hostName = args[0];
-        int portNumber = Integer.parseInt(args[1]);
+        int portNumber = 4444;
 
         try 
         (
             //initiate client socket connected to server
             Socket kkSocket = new Socket(hostName, portNumber); 
-            // new Socket(hostName, portNumber); 
             //create output/input streams
             PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()))
