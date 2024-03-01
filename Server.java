@@ -54,21 +54,40 @@ public class Server
 
             //create output/input streams
             // PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true); 
+            FileInputStream fis = new FileInputStream(new File("words.txt"));
             BufferedReader fileReader = new BufferedReader(new FileReader("words.txt"))
         ) 
         {
             //send file path to client
             //FindFile kkp = new FindFile();
 
-            String line;
-            int clientIndex = 0;
+            byte[] fileBytes = fis.readAllBytes();
+            int numSubstrings = 1;
+            int approximateSubstringLength = fileBytes.length / numSubstrings;
 
-            while ((line = fileReader.readLine()) != null) 
+            String[] substrings = new String[numSubstrings];
+            for (int i = 0, start = 0; i < numSubstrings; i++) 
             {
-                clientWriters[clientIndex].println(line); // Send a line to the current client
-
-                clientIndex = (clientIndex + 1) % 1; // Cycle to the next client
+                int end = Math.min(start + approximateSubstringLength, fileBytes.length);
+                substrings[i] = new String(fileBytes, start, end - start);
+                clientWriters[i].println(substrings[i]);
+                start = end;
             }
+
+            // Output the substrings
+            // for (String substring : substrings) {
+            //     System.out.println(substring);
+            // }
+
+            // String line;
+            // int clientIndex = 0;
+
+            // while ((line = fileReader.readLine()) != null) 
+            // {
+            //     clientWriters[clientIndex].println(line); // Send a line to the current client
+
+            //     clientIndex = (clientIndex + 1) % 1; // Cycle to the next client
+            // }
 
             // Indicate end of file to all clients
             // for (PrintWriter writer : clientWriters) 

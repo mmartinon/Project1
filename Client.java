@@ -32,13 +32,12 @@ public class Client
                 //print server's request
                 System.out.println("Server: What is the word count of " + fromServer + "?");
 
-                //count words in the file
+                //count words in the line
                 wordCount += WordCount.wordCount(fromServer);
+                out.println(String.valueOf(wordCount));
 
                 //print word count of file on client terminal
-                System.out.println("Client: The word count of " + fromServer + " is " + wordCount + ".");
-                //send word count to server
-                
+                System.out.println("Client: The word count of " + fromServer + " is " + wordCount + ".");                
 
                 //end session between server/client
                 // System.exit(1);
