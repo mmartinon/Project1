@@ -71,10 +71,10 @@ public class Server
             }
 
             // Indicate end of file to all clients
-            for (PrintWriter writer : clientWriters) 
-            {
-                writer.println("EOF");
-            }
+            // for (PrintWriter writer : clientWriters) 
+            // {
+            //     writer.println("EOF");
+            // }
 
             // Read and print word counts from each client
             for (int i = 0; i < 2; i++) {
