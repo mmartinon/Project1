@@ -1,6 +1,4 @@
 import java.net.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.io.*;
 
 public class Server 
@@ -42,63 +40,33 @@ public class Server
             clientWriters[j] = new PrintWriter(clientSockets[j].getOutputStream(), true);
         }
 
-        try ( 
-            FileInputStream fis = new FileInputStream(new File("words.txt"));
-            BufferedReader fileReader = new BufferedReader(new FileReader("words.txt"))
-        ) 
-        {
-            List<String> lines = new ArrayList<>();
-            String line;
-            while ((line = fileReader.readLine()) != null) {
-                lines.add(line);
-            }
-
-            int numSublists = 5;
-            int linesPerSublist = lines.size() / numSublists;
-
-            List<List<String>> sublists = new ArrayList<>();
-            for (int i = 0; i < numSublists; i++) {
-                int start = i * linesPerSublist;
-                int end = (i + 1) * linesPerSublist;
-                if (i == numSublists - 1) {
-                    // Last sublist may have fewer lines if the total number of lines is not divisible evenly
-                    end = lines.size();
-                }
-                sublists.add(lines.subList(start, end));
-
-                // Send each sublist to the client
-                String sublistString = String.join(System.lineSeparator(), sublists.get(i));
-                clientWriters[i].println(sublistString);
-            }
-        } 
-
-        // try 
-        // ( 
+        try 
+        ( 
             //initiate server socket on port
             //connect to client
             // Socket clientSocket = serverSocket.accept(); 
 
             //create output/input streams
             // PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true); 
-        //     FileInputStream fis = new FileInputStream(new File("words.txt"));
-        //     BufferedReader fileReader = new BufferedReader(new FileReader("words.txt"))
-        // ) 
-        // {
+            FileInputStream fis = new FileInputStream(new File("words.txt"));
+            BufferedReader fileReader = new BufferedReader(new FileReader("words.txt"))
+        ) 
+        {
             //send file path to client
             //FindFile kkp = new FindFile();
 
-            // byte[] fileBytes = fis.readAllBytes();
-            // int numSubstrings = 1;
-            // int approximateSubstringLength = fileBytes.length / numSubstrings;
+            byte[] fileBytes = fis.readAllBytes();
+            int numSubstrings = 1;
+            int approximateSubstringLength = fileBytes.length / numSubstrings;
 
-            // String[] substrings = new String[numSubstrings];
-            // for (int i = 0, start = 0; i < numSubstrings; i++) 
-            // {
-            //     int end = Math.min(start + approximateSubstringLength, fileBytes.length);
-            //     substrings[i] = new String(fileBytes, start, end - start);
-            //     clientWriters[i].println(substrings[i]);
-            //     start = end;
-            // }
+            String[] substrings = new String[numSubstrings];
+            for (int i = 0, start = 0; i < numSubstrings; i++) 
+            {
+                int end = Math.min(start + approximateSubstringLength, fileBytes.length);
+                substrings[i] = new String(fileBytes, start, end - start);
+                clientWriters[i].println(substrings[i]);
+                start = end;
+            }
 
             // Output the substrings
             // for (String substring : substrings) {
