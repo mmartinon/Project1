@@ -15,6 +15,7 @@ public class Client
         String hostName = args[0];
         int portNumber = 4444;
         int wordCount = 0;
+        int totalWords = 0;
 
         try 
         (
@@ -25,33 +26,56 @@ public class Client
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         ) 
         {
-            StringBuilder fromServer = new StringBuilder();
+            // StringBuilder fromServer = new StringBuilder();
             char[] buffer = new char[1024];
             char[] temp = new char[1024];
             int bytesRead;
 
             while (true) 
             {
+                // StringBuilder receivedContent = new StringBuilder();
+                // String receivedString;
+                // while ((receivedString = in.readLine()) != null) {
+                //     receivedContent.append(receivedString).append("\n");  // Preserve newlines
+
+                //     if (receivedString.equals("****")) {
+                //         break;
+                //     }
+                // }
+
+                // // Process the entire content
+                // if (receivedContent.length() > 0) {
+                //     String trimmedContent = receivedContent.toString().trim();
+                //     wordCount = WordCount.wordCount(trimmedContent);
+                //     System.out.println(trimmedContent);
+                //     System.out.println("Word count of received content: " + wordCount);
+                //     out.println(wordCount);
+                // } else {
+                //     System.err.println("Received empty content from server");
+                // }
                 String receivedString = in.readLine();
 
-                if (receivedString != null && receivedString.equals("****\n")) {
+                if (receivedString != null && receivedString.equals("****")) {
                     break;
                 }
 
                 // Handle null case
                 if (receivedString != null) {
                     wordCount = WordCount.wordCount(receivedString.trim());
-                    System.out.println("Client: Word count of received substring: " + wordCount);
+                    totalWords += wordCount;
+                    System.out.println(receivedString);
+                    System.out.println("Word count of received substring: " + totalWords);
                     out.println(wordCount);
                 } else {
                     System.err.println("Received null string from server");
                 }
 
                 // Calculate word count for the received substring
-                wordCount = WordCount.wordCount(receivedString);
+                // wordCount = WordCount.wordCount(receivedString);
 
                 // Print word count on client terminal
-                System.out.println("Client: Word count of received substring: " + wordCount);
+                // System.out.println("hi");
+                // System.out.println("Client: Word count of received substring: " + wordCount);
 
                 // Send word count to server
                 out.println(wordCount);
@@ -88,18 +112,18 @@ public class Client
 
 
             // print the server's request
-            System.out.println("Server: What is the word count of " + fromServer + "?");
+            // System.out.println("Server: What is the word count of " + fromServer + "?");
 
             // count words in the entire string
-            wordCount = WordCount.wordCount(fromServer.toString());
+            // wordCount = WordCount.wordCount(fromServer.toString());
             //out.println(wordCount + "\n");
             
-            System.out.println(socket.getPort());
-            out.println("client message");
-            out.flush();
+            // System.out.println(socket.getPort());
+            // out.println("client message");
+            // out.flush();
 
             // print word count of the string on the client terminal
-            System.out.println("Client: The word count of " + fromServer + " is " + wordCount + ".");
+            // System.out.println("Client: The word count of " + fromServer + " is " + wordCount + ".");
             
             // String fromServer;
 
@@ -121,7 +145,7 @@ public class Client
 
             // out.println(String.valueOf(wordCount));
 
-            System.exit(1);
+            // System.exit(1);
         } 
         catch (UnknownHostException e) 
         {
