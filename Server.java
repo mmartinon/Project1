@@ -142,18 +142,17 @@ public class Server
 
                 int[] clientWordCounts = new int[numClients];
 
-                for (int i = 0; i < numClients; i++)
-                {
+                int totalWordCount = 0;
+                for (int i = 0; i < numClients; i++) {
                     clientWriters[i].println(substrings[i]);
-                        // clientWriters[i].flush();
-                        String count;
-                        while ((count = clientStreams[i].readLine()) != null) {
-                            clientWordCounts[i] = Integer.parseInt(count);
-                     clientWordCounts[i] = Integer.parseInt(count);
-                     System.out.println("Word count from client " + (i + 1) + ": " + count);
-                        clientWriters[i].println("****");
-                        clientWriters[i].flush();
-                        }
+                    clientWriters[i].flush();
+                    String count;
+                    while ((count = clientStreams[i].readLine()) != null) {
+                        totalWordCount += Integer.parseInt(count);
+                    System.out.println("Word count from client " + (i + 1) + ": " + count);
+                    clientWriters[i].println("****");
+                    clientWriters[i].flush();
+                    }
                 }
 
                 // Read and print word counts from each client
@@ -165,11 +164,11 @@ public class Server
                      
                 //  }
  
-                 // Calculate total word count
-                 int totalWordCount = 0;
-                 for (int countt : clientWordCounts) {
-                     totalWordCount += countt;
-                 }
+                //  // Calculate total word count
+                //  int totalWordCount = 0;
+                //  for (int countt : clientWordCounts) {
+                //      totalWordCount += countt;
+                //  }
 
                 // System.out.println(clientStreams[0].readLine());
 
