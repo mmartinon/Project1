@@ -7,7 +7,7 @@ public class Server
     {    
         int portNumber = 4444;
 
-        //String ipAddress =  IPPrinter.printIP();
+        String ipAddress =  IPPrinter.printIP();
  
         Socket[] clientSockets = new Socket[5];
         ServerSocket serverSocket = new ServerSocket(portNumber); 
