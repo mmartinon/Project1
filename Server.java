@@ -142,7 +142,6 @@ public class Server
 
                 int[] clientWordCounts = new int[numClients];
 
-
                 for (int i = 0; i < numClients; i++)
                 {
                     clientWriters[i].println(substrings[i]);
