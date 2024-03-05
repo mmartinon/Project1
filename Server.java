@@ -34,7 +34,7 @@ public class Server
             try 
             ( 
             
-                FileInputStream fis = new FileInputStream(new File("words.txt"));
+                FileInputStream fis = new FileInputStream(new File("file2.txt"));
             ) 
             {
                 
