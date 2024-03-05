@@ -9,21 +9,21 @@ public class Server
 
         String ipAddress =  IPPrinter.printIP();
  
-        Socket[] clientSockets = new Socket[6];
+        Socket[] clientSockets = new Socket[5];
         ServerSocket serverSocket = new ServerSocket(portNumber); 
         try {
             System.out.println("Waiting for client connection...");
             // Wait for 5 clients
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 5; i++)
             {
                 clientSockets[i] = serverSocket.accept();
                 System.out.println("Client connected at: " + clientSockets[i].getInetAddress() + ":" + clientSockets[i].getPort());
             }
 
-            BufferedReader[] clientStreams = new BufferedReader[6];
-            PrintWriter[] clientWriters = new PrintWriter[6];
+            BufferedReader[] clientStreams = new BufferedReader[5];
+            PrintWriter[] clientWriters = new PrintWriter[5];
 
-            for (int j = 0; j < 6; j++) 
+            for (int j = 0; j < 5; j++) 
             {
                 clientStreams[j] = new BufferedReader(new InputStreamReader(clientSockets[j].getInputStream()));
                 clientWriters[j] = new PrintWriter(clientSockets[j].getOutputStream(), true);
